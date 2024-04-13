@@ -8,7 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    defaults:
+          run:
+            working-directory: WebAPI/WebAPI
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -19,15 +21,12 @@ jobs:
         dotnet-version: '7.0.x'  # Specify the .NET version you're using
 
     - name: Restore dependencies
-      working-directory: WebAPI/WebAPI
       run: dotnet restore
 
     - name: Build
-      working-directory: WebAPI/WebAPI
       run: dotnet build --configuration Release
 
     - name: Publish
-      working-directory: WebAPI/WebAPI
       run: dotnet publish -c Release -o publish_output
 
     - name: Push to another repository
