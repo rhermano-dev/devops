@@ -23,9 +23,11 @@ jobs:
       run: dotnet restore
 
     - name: Build
+      working-directory: WebAPI/WebAPI
       run: dotnet build --configuration Release
 
     - name: Publish
+      working-directory: WebAPI/WebAPI
       run: dotnet publish -c Release -o publish_output
 
     - name: Push to another repository
