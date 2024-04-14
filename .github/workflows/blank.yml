@@ -32,7 +32,8 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: published-artifacts
-          path: ./publish
+          path: publish
+          
       - name: Check files
         run: ls -lah
 
