@@ -38,6 +38,6 @@ jobs:
     - name: Push to another repository
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.RELEASE }}
         branch: devops_release  # Specify the branch of the other repository
         directory: /home/runner/work/devops/devops/WebAPI/WebAPI/publish_output  # Specify the directory containing the artifacts
