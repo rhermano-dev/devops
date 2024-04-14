@@ -71,3 +71,5 @@ jobs:
           git add .
           git commit -m "Publish artifacts"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE }}
