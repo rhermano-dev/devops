@@ -1,0 +1,83 @@
+name: Test
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+          run:
+            working-directory: WebAPI/WebAPI
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.x'  # Specify the .NET version you're using
+
+      - name: Restore dependencies
+        run: dotnet restore
+  
+      - name: Build
+        run: dotnet build --configuration Release
+
+
+      - name: Publish
+        run: dotnet publish -o ./publish
+          
+      - name: Check files
+        run: |
+          ls -lah
+          ls -lah ./publish
+          
+        
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: published-artifacts
+          path: WebAPI/WebAPI/publish
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+     
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: published-artifacts
+          path: ./published-artifacts
+          
+      - name: Check path
+        run: ls -lah
+          
+      - name: Checkout destination repository
+        uses: actions/checkout@v2
+        with:
+          repository: rhermano-dev/devops_release
+          path: ./destination-repo
+          token: ${{ secrets.RELEASE }} # Use your personal access token secret here
+          
+      - name: Check path
+        run: ls -lah
+
+        
+      - name: Copy Artifacts
+        run: |
+          cp -r ./published-artifacts/* ./destination-repo/
+          
+      - name: Check path
+        run: ls -lah ./destination-repo/
+          
+      - name: Commit and Push Artifacts
+        run: |
+          cd ./destination-repo
+          git config user.name "rhermano devops"
+          git config user.email "reynaldohermano3@gmail.com"
+          git add .
+          git commit -m "Publish artifacts"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE }}
