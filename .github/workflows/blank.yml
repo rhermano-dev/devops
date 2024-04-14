@@ -1,4 +1,4 @@
-name: Publish and Push Artifacts
+name: Test
 on:
   pull_request:
     branches:
