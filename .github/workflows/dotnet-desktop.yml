@@ -70,7 +70,7 @@ jobs:
           cp -r ./published-artifacts/* ./destination-repo/WebAPI/
           
       - name: Check path
-        run: ls -lah ./destination-repo/
+        run: ls -lah ./destination-repo/WebAPI/
           
       - name: Commit and Push Artifacts
         run: |
@@ -78,6 +78,7 @@ jobs:
           git config user.name "rhermano devops"
           git config user.email "reynaldohermano3@gmail.com"
           git add .
+          git status
           git commit -m "Publish artifacts"
           git push
         env:
