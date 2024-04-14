@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: published-artifacts
-          path: ./publish/*
+          path: WebAPI/WebAPI/publish
 
 
   deploy:
