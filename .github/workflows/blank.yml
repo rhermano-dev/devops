@@ -66,8 +66,8 @@ jobs:
       - name: Commit and Push Artifacts
         run: |
           cd ./destination-repo
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          git config user.name "rhermano devops"
+          git config user.email "reynaldohermano3@gmail.com"
           git add .
           git commit -m "Publish artifacts"
           git push
