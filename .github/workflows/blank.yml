@@ -41,6 +41,8 @@ jobs:
           run:
             working-directory: WebAPI/WebAPI
     steps:
+      - name: Check path
+        run: ls -lah
       - name: Download Artifacts
         uses: actions/download-artifact@v2
         with:
