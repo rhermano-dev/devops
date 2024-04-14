@@ -28,7 +28,8 @@ jobs:
 
     - name: Publish
       run: dotnet publish -c Release -o publish_output
-
+    - name: Check current directory
+      run: ls -lah
     - name: Push to another repository
       uses: ad-m/github-push-action@master
       with:
