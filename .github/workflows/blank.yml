@@ -8,16 +8,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    defaults:
+          run:
+            working-directory: WebAPI/WebAPI
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.x'  # Specify the .NET version you're using
 
-      - name: Build and Publish
-        run: |
-          # Your build and publish commands here
-          dotnet build
-          dotnet publish -o ./publish
+      - name: Restore dependencies
+        run: dotnet restore
+  
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Publish
+        run: dotnet publish -o ./publish
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
