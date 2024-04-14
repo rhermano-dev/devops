@@ -25,6 +25,7 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release
 
+
       - name: Publish
         run: dotnet publish -o ./publish
           
