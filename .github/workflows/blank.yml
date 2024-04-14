@@ -1,43 +1,56 @@
-name: Build and Push
+name: Publish and Push Artifacts
 
 on:
   push:
     branches:
-      - main  # or specify your branch name
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-          run:
-            working-directory: WebAPI/WebAPI
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '7.0.x'  # Specify the .NET version you're using
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Restore dependencies
-      run: dotnet restore
+      - name: Build and Publish
+        run: |
+          # Your build and publish commands here
+          dotnet build
+          dotnet publish -o ./publish
 
-    - name: Build
-      run: dotnet build --configuration Release
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: published-artifacts
+          path: ./publish
 
-    - name: Publish
-      run: dotnet publish -c Release -o publish_output
-      
-    - name: Check current directory
-      run: |
-        ls -lah
-        ls -lah publish_output/
-        pwd
-      
-    - name: Push to another repository
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.RELEASE }}
-        branch: devops_release  # Specify the branch of the other repository
-        directory: ./publish_output  # Specify the directory containing the artifacts
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: published-artifacts
+          path: ./published-artifacts
+
+      - name: Checkout destination repository
+        uses: actions/checkout@v2
+        with:
+          repository: rhermano-dev/devops_release
+          path: ./destination-repo
+
+      - name: Copy Artifacts
+        run: |
+          cp -r ./published-artifacts/* ./destination-repo/
+
+      - name: Commit and Push Artifacts
+        run: |
+          cd ./destination-repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Publish artifacts"
+          git push
