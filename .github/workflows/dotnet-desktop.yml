@@ -62,8 +62,10 @@ jobs:
           token: ${{ secrets.RELEASE }} # Use your personal access token secret here
           
       - name: Check path
-        run: ls -lah ./destination-repo/WebAPI/
-        
+        run: |
+          rm -rf ./destination-repo/WebAPI/*
+          ls -lah ./destination-repo/WebAPI/
+          
       - name: Copy Artifacts
         run: |
           cp -r ./published-artifacts/* ./destination-repo/WebAPI/
@@ -74,7 +76,6 @@ jobs:
       - name: Commit and Push Artifacts
         run: |
           cd ./destination-repo/WebAPI
-          rm
           git config user.name "rhermano devops"
           git config user.email "reynaldohermano3@gmail.com"
           git add .
