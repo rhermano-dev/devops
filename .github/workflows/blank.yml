@@ -64,6 +64,7 @@ jobs:
         run: |
           cp -r ./published-artifacts/* ./destination-repo/
 
+          
       - name: Commit and Push Artifacts
         run: |
           cd ./destination-repo
