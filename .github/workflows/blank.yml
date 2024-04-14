@@ -63,20 +63,22 @@ jobs:
           repository: rhermano-dev/devops_release
           path: ./destination-repo
           token: ${{ secrets.RELEASE }} # Use your personal access token secret here
+          
       - name: Check path
         run: ls -lah
         
       - name: Copy Artifacts
         run: |
           cp -r ./published-artifacts/* ./destination-repo/
-
+          
+      - name: Check path
+        run: ls -lah ./destination-repo/
           
       - name: Commit and Push Artifacts
         run: |
           cd ./destination-repo
           git config user.name "rhermano devops"
           git config user.email "reynaldohermano3@gmail.com"
-          git status
           git add .
           git commit -m "Publish artifacts"
           git push
