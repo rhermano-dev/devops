@@ -27,15 +27,18 @@ jobs:
 
       - name: Publish
         run: dotnet publish -o ./publish
-
+          
+      - name: Check files
+        run: |
+          ls -lah
+          ls -lah ./publish
+        
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: published-artifacts
-          path: publish
-          
-      - name: Check files
-        run: ls -lah
+          path: ./publish/*
+
 
   deploy:
     runs-on: ubuntu-latest
