@@ -69,7 +69,7 @@ namespace WebAPI.Tests
             // Assert
             var validSummaries = new[]
             {
-                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching", "Very Hot"
             };
             foreach (var forecast in result)
             {
