@@ -75,6 +75,7 @@ jobs:
       - name: Commit and Push Artifacts
         run: |
           cd ./destination-repo
+          ls -lah
           git config user.name "rhermano devops"
           git config user.email "reynaldohermano3@gmail.com"
           git add .
