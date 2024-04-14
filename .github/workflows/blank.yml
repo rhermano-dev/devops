@@ -60,7 +60,7 @@ jobs:
         with:
           repository: rhermano-dev/devops_release
           path: ./destination-repo
-          
+          token: ${{ secrets.RELEASE }} # Use your personal access token secret here
 
       - name: Copy Artifacts
         run: |
