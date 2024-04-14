@@ -33,13 +33,12 @@ jobs:
         with:
           name: published-artifacts
           path: ./publish
+      - name: Check files
+        run: ls -lah
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    defaults:
-          run:
-            working-directory: WebAPI/WebAPI
     steps:
       - name: Check path
         run: ls -lah
