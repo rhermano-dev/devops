@@ -17,6 +17,8 @@ namespace WebAPI.Controllers
         {
             _logger = logger;
         }
+
+
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
