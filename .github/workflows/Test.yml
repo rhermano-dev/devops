@@ -24,7 +24,7 @@ jobs:
       - name: Retrieve branch name
         run: |
           git fetch origin main
-          git rebase origin/main
+          git rebase origin/main || git rebase
           echo "The branch name is ${{ github.head_ref }}"
         
       - name: Restore dependencies
