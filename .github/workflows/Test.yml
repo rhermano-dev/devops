@@ -46,8 +46,8 @@ jobs:
       - name: Checkout ReportGenerator
         uses: danielpalme/ReportGenerator-GitHub-Action@5.2.4
         with:
-          reports: ./TestResults/*/coverage.cobertura.xml
-          targetdir: ./CoverageReport
+          reports:  WebAPI/WebAPITestProject/TestResults/*/coverage.cobertura.xml
+          targetdir:  WebAPI/WebAPITestProject/CoverageReport
         
       - name: Checkout destination repository
         uses: actions/checkout@v2
