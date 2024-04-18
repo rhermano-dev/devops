@@ -57,7 +57,9 @@ jobs:
           token: ${{ secrets.RELEASE }} # Use your personal access token secret here
           
       - name: Check path
-        run: ls -lah ./destination-repo
+        run: |
+          pwd
+          ls -lah WebAPI/WebAPITestProject/destination-repo/
         
       - name: Copy Report
         run: |
