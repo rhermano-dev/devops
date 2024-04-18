@@ -57,9 +57,8 @@ jobs:
           token: ${{ secrets.RELEASE }} # Use your personal access token secret here
           
       - name: Check path
-        run: |
-          rm -rf ./destination-repo/TestReport/*
-          ls -lah ./destination-repo/TestReport/
+        run: ls -lah ./destination-repo
+        
       - name: Copy Report
         run: |
           cp -r ./CoverageReport/* ./destination-repo/TestReport/
