@@ -36,7 +36,7 @@ namespace WebAPI.Tests
 
             // Assert
             var dates = result.Select(forecast => forecast.Date);
-            Assert.Equal(5, dates.Distinct().Count());
+            Assert.Equal(6, dates.Distinct().Count());
         }
 
         [Fact]
