@@ -19,9 +19,9 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '7.0.x'  # Specify the .NET version you're using
+          dotnet-version: '7.0.x'
           
-      - name: Retrieve branch name
+      - name: Retrieve branch and rebase to main
         run: |
           git fetch origin main
           git rebase origin/main
@@ -43,11 +43,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          ref:  ${{ github.head_ref }}
+
+      - name: Retrieve branch and rebase to main
+        run: |
+          git fetch origin main
+          git rebase origin/main
+          echo "The branch name is ${{ github.head_ref }}"
         
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '7.0.x'  # Specify the .NET version you're using
+          dotnet-version: '7.0.x'
           
       - name: Execute Testing
         run: dotnet test --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
@@ -70,9 +78,6 @@ jobs:
           cd ../../
           rm -rf ./destination-repo/TestReport/*
           cp -r WebAPI/WebAPITestProject/CoverageReport/* ./destination-repo/TestReport/
-
-      # - name: Copy Report
-      #   run: cp -r WebAPI/WebAPITestProject/CoverageReport/* ./destination-repo/TestReport/
 
       - name: Commit and Push Test Report
         run: |
