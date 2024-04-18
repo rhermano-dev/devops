@@ -25,7 +25,7 @@ jobs:
           git fetch origin ${{ github.head_ref }}
           git fetch origin main
           git switch ${{ github.head_ref }}
-          git rebase main
+          git rebase origin/main
           echo "The branch name is ${{ github.head_ref }}"
         
       - name: Restore dependencies
