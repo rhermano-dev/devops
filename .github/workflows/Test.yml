@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
           run:
-            working-directory: WebAPI/TestProject
+            working-directory: WebAPI/WebAPI
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -23,14 +23,12 @@ jobs:
   
       - name: Build
         run: dotnet build --configuration Release
-
-      - name: Execute unit tests
-        run: dotnet test
+        
   deploy_report:
     runs-on: ubuntu-latest
     defaults:
           run:
-            working-directory: WebAPI/TestProject
+            working-directory: WebAPI/WebAPITestProject
     needs: build
     if: success()
     steps:
