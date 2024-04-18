@@ -52,9 +52,12 @@ jobs:
       
       - name: Checkout ReportGenerator
         uses: danielpalme/ReportGenerator-GitHub-Action@5.2.4
+        with:
+          reports: ./TestResults/*/coverage.cobertura.xml
+          targetdir: ./CoverageReport
         
       - name: Generate Report
-        run: reportgenerator -reports:TestResults\*\coverage.cobertura.xml -targetdir:CoverageReport
+        run: reportgenerator
         
       - name: Checkout destination repository
         uses: actions/checkout@v2
