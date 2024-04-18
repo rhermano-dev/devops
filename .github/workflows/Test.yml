@@ -49,7 +49,10 @@ jobs:
           
       - name: Execute Testing
         run: dotnet test --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
-
+      
+      - name: Checkout ReportGenerator
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.2.4
+        
       - name: Generate Report
         run: reportgenerator -reports:TestResults\*\coverage.cobertura.xml -targetdir:CoverageReport
         
