@@ -61,6 +61,7 @@ jobs:
           cd ../../
           rm -rf ./destination-repo/TestReport/*
           ls -lah ./destination-repo/TestReport/
+          ls -lah
         
       - name: Copy Report
         run: cp -r WebAPI/WebAPITestProject/CoverageReport/* ./destination-repo/TestReport/
