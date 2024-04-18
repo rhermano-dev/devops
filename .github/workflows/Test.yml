@@ -40,13 +40,6 @@ jobs:
         with:
           dotnet-version: '7.0.x'  # Specify the .NET version you're using
           
-      - name: Create Directory
-        run: |
-          mkdir TestReport
-          cd TestReport
-          mkdir TestResults
-          mkdir CoverageReport
-          
       - name: Execute Testing
         run: dotnet test --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
       
@@ -55,9 +48,6 @@ jobs:
         with:
           reports: ./TestResults/*/coverage.cobertura.xml
           targetdir: ./CoverageReport
-        
-      - name: Generate Report
-        run: reportgenerator
         
       - name: Checkout destination repository
         uses: actions/checkout@v2
