@@ -13,7 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+        with:
+          token: ${{ secrets.RELEASE }}
         
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
@@ -22,6 +23,8 @@ jobs:
           
       - name: Retrieve branch name
         run: |
+          git config user.name "rhermano devops"
+          git config user.email "reynaldohermano3@gmail.com"
           git fetch origin ${{ github.head_ref }}
           git fetch origin main
           git switch ${{ github.head_ref }}
