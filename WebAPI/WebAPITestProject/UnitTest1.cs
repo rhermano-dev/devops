@@ -21,7 +21,7 @@ namespace WebAPI.Tests
             var result = controller.Get();
 
             // Assert
-            Assert.Equal(5, result.Count());
+            Assert.Equal(6, result.Count());
         }
 
         [Fact]
