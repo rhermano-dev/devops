@@ -43,7 +43,7 @@ jobs:
       - name: Execute Testing
         run: dotnet test --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
       
-      - name: Checkout ReportGenerator
+      - name: Execute ReportGenerator
         uses: danielpalme/ReportGenerator-GitHub-Action@5.2.4
         with:
           reports:  WebAPI/WebAPITestProject/TestResults/*/coverage.cobertura.xml
@@ -58,13 +58,11 @@ jobs:
           
       - name: Check path
         run: |
-          cd ../../
-          ls -lah
-          ls -lah ./destination-repo/
+          rm -rf ./destination-repo/TestReport/*
+          ls -lah ./destination-repo/TestReport/
         
       - name: Copy Report
-        run: |
-          cp -r ./CoverageReport/* ./destination-repo/TestReport/
+        run: cp -r ./WebAPI/WebAPITestProject/CoverageReport/* ./destination-repo/TestReport/
 
       - name: Commit and Push Test Report
         run: |
