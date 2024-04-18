@@ -30,6 +30,4 @@ namespace WebAPI.Controllers
             .ToArray();
         }
     }
-
-
 }
