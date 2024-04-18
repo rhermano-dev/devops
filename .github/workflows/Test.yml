@@ -22,8 +22,9 @@ jobs:
           
       - name: Retrieve branch name
         run: |
-          git fetch origin  ${{ github.head_ref }}
-          git switch  ${{ github.head_ref }}
+          git fetch origin ${{ github.head_ref }}
+          git fetch origin main
+          git switch ${{ github.head_ref }}
           git rebase main
           echo "The branch name is ${{ github.head_ref }}"
         
