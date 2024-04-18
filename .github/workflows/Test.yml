@@ -56,9 +56,13 @@ jobs:
           path: ./destination-repo
           token: ${{ secrets.RELEASE }} # Use your personal access token secret here
           
+      - name: Check path
+        run: |
+          rm -rf ./destination-repo/TestReport/*
+          ls -lah ./destination-repo/TestReport/
       - name: Copy Report
         run: |
-          cp -r * ./destination-repo/TestReport/
+          cp -r ./CoverageReport/* ./destination-repo/TestReport/
 
       - name: Commit and Push Test Report
         run: |
