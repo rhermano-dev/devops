@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
           run:
-            working-directory: WebAPI/WebAPITestProject
+            working-directory: WebAPI/TestProject
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
           run:
-            working-directory: WebAPI/WebAPITestProject
+            working-directory: WebAPI/TestProject
     needs: build
     if: success()
     steps:
