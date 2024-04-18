@@ -64,9 +64,11 @@ jobs:
           ls -lah
           ls -lah WebAPI/
           ls -lah WebAPI/WebAPITestProject/
-        
-      - name: Copy Report
-        run: cp -r WebAPI/WebAPITestProject/CoverageReport/* ./destination-repo/TestReport/
+          ls -lah WebAPI/WebAPITestProject/CoverageReport/
+          cp -r WebAPI/WebAPITestProject/CoverageReport/* ./destination-repo/TestReport/
+
+      # - name: Copy Report
+      #   run: cp -r WebAPI/WebAPITestProject/CoverageReport/* ./destination-repo/TestReport/
 
       - name: Commit and Push Test Report
         run: |
