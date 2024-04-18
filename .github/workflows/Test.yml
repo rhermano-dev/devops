@@ -32,6 +32,14 @@ jobs:
     needs: build
     if: success()
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.x'  # Specify the .NET version you're using
+          
       - name: Create Directory
         run: |
           mkdir TestReport
