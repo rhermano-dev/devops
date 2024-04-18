@@ -58,7 +58,7 @@ jobs:
           
       - name: Check path
         run: |
-          cd ..
+          cd ../../
           ls -lah
           ls -lah ./destination-repo/
         
