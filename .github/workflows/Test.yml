@@ -63,6 +63,7 @@ jobs:
           ls -lah ./destination-repo/TestReport/
           ls -lah
           ls -lah WebAPI/
+          ls -lah WebAPI/WebAPITestProject/
         
       - name: Copy Report
         run: cp -r WebAPI/WebAPITestProject/CoverageReport/* ./destination-repo/TestReport/
