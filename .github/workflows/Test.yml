@@ -60,11 +60,6 @@ jobs:
         run: |
           cd ../../
           rm -rf ./destination-repo/TestReport/*
-          ls -lah ./destination-repo/TestReport/
-          ls -lah
-          ls -lah WebAPI/
-          ls -lah WebAPI/WebAPITestProject/
-          ls -lah WebAPI/WebAPITestProject/CoverageReport/
           cp -r WebAPI/WebAPITestProject/CoverageReport/* ./destination-repo/TestReport/
 
       # - name: Copy Report
@@ -72,7 +67,7 @@ jobs:
 
       - name: Commit and Push Test Report
         run: |
-          cd ./destination-repo/TestReport
+          cd ../../destination-repo/TestReport
           git config user.name "rhermano devops"
           git config user.email "reynaldohermano3@gmail.com"
           git add .
