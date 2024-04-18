@@ -58,7 +58,7 @@ jobs:
           
       - name: Check path
         run: |
-          ll
+          ls -lah
           ls -lah WebAPI/WebAPITestProject/destination-repo/
         
       - name: Copy Report
