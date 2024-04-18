@@ -26,3 +26,47 @@ jobs:
 
       - name: Execute unit tests
         run: dotnet test
+  deploy_report:
+    runs-on: ubuntu-latest
+    defaults:
+          run:
+            working-directory: WebAPI/WebAPITestProject
+    needs: build
+    if: success()
+    steps:
+      - name: Create Directory
+        run: |
+          mkdir TestReport
+          cd TestReport
+          mkdir TestResults
+          mkdir CoverageReport
+          
+      - name: Execute Testing
+        run: dotnet test --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura
+
+      - name: Generate Report
+        run: reportgenerator -reports:TestResults\*\coverage.cobertura.xml -targetdir:CoverageReport
+        
+      - name: Checkout destination repository
+        uses: actions/checkout@v2
+        with:
+          repository: rhermano-dev/devops_release
+          path: ./destination-repo
+          token: ${{ secrets.RELEASE }} # Use your personal access token secret here
+          
+      - name: Copy Report
+        run: |
+          cp -r * ./destination-repo/TestReport/
+
+      - name: Commit and Push Test Report
+        run: |
+          cd ./destination-repo/TestReport
+          git config user.name "rhermano devops"
+          git config user.email "reynaldohermano3@gmail.com"
+          git add .
+          git status
+          git commit -m "Publish report"
+          git push
+        
+    
+    
