@@ -13,8 +13,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          ref:  ${{ github.head_ref }}
+        
         
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
@@ -23,8 +22,9 @@ jobs:
           
       - name: Retrieve branch name
         run: |
-          git fetch origin main
-          git rebase origin/main || git rebase
+          git fetch origin  ${{ github.head_ref }}
+          git switch  ${{ github.head_ref }}
+          git rebase main
           echo "The branch name is ${{ github.head_ref }}"
         
       - name: Restore dependencies
